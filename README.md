@@ -7,9 +7,14 @@
     * Contructor
     * Property
     * Getter
-3. Sample Jokes App which includes thymeleaf templating
+3. Sample Jokes App with thymeleaf - No DB
+4. Recipes App with thymeleaf - H2 DB
+5. Spring Testing
+6. RESTful APIs using spring
+7. Docker with spring
 
 ## Sources
 
 1. https://www.udemy.com/spring-framework-5-beginner-to-guru
 2. https://spring.io/guides/gs/spring-boot/
+3. https://www.callicoder.com/spring-boot-rest-api-tutorial-with-mysql-jpa-hibernate/
