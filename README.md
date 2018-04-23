@@ -18,3 +18,4 @@
 1. https://www.udemy.com/spring-framework-5-beginner-to-guru
 2. https://spring.io/guides/gs/spring-boot/
 3. https://www.callicoder.com/spring-boot-rest-api-tutorial-with-mysql-jpa-hibernate/
+4. https://www.boraji.com/spring-mvc-4-restcontroller-example
