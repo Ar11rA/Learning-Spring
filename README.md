@@ -4,9 +4,9 @@
 
 1. Bookstore example to learn basics of spring - Just a simple request/response model
 2. Dependency Injection Demo - 
-    2.1 Contructor
-    2.2 Property
-    2.3 Getter
+    * Contructor
+    * Property
+    * Getter
 3. Sample Jokes App which includes thymeleaf templating
 
 ## Sources
