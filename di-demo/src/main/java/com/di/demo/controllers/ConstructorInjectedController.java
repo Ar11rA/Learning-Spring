@@ -9,6 +9,7 @@ public class ConstructorInjectedController {
 
     private IGreetingService greetingService;
 
+    //@Autowired - not necessary in constructor based DI
     public ConstructorInjectedController(@Qualifier("constructorGreetingService") IGreetingService greetingService) {
         this.greetingService = greetingService;
     }

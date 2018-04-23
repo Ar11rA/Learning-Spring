@@ -1,14 +1,14 @@
 package com.di.demo.controllers;
 
-import com.di.demo.services.GreetingService;
+import com.di.demo.services.IGreetingService;
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class HelloController {
 
-    private GreetingService greetingService;
+    private IGreetingService greetingService;
 
-    public HelloController(GreetingService greetingService) {
+    public HelloController(IGreetingService greetingService) {
         this.greetingService = greetingService;
     }
 
