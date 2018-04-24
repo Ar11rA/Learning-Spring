@@ -10,7 +10,7 @@
 3. Sample Jokes App with thymeleaf - No DB
 4. Recipes App with thymeleaf - H2 DB
 5. Spring Testing
-6. RESTful APIs using spring
+6. RESTful APIs using spring( With Mapstruct and validations)
 7. Docker with spring
 
 ## Sources
