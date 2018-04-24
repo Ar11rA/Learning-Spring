@@ -27,7 +27,7 @@ public class TestControllerTest {
     @Test
     public void getIndex() throws Exception {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(testController).build();
-        mockMvc.perform(get("/test"))
+        mockMvc.perform(get("/api/test"))
                 .andExpect(status().isOk());
     }
 }
