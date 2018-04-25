@@ -1,27 +1,27 @@
 package com.example.mysql.controllers;
 
 import com.example.mysql.domains.User;
-import com.example.mysql.repositories.UserRepository;
+import com.example.mysql.services.IUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import java.util.List;
 
 @Controller
+@RequestMapping(path="/users")
 public class UserController {
 
-    private UserRepository userRepository;
+    private IUserService userService;
 
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserController(IUserService userService) {
+        this.userService = userService;
     }
 
-    @RequestMapping(path="/users", method = RequestMethod.GET)
+    @RequestMapping(path="/all", method = RequestMethod.GET)
     public ResponseEntity<List<User>> getUsers() {
-        List<User> users = userRepository.findAll();
+        List<User> users = userService.getUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 }
