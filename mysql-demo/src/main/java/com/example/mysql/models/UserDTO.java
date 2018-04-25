@@ -1,19 +1,7 @@
-package com.example.mysql.domains;
+package com.example.mysql.models;
 
-import org.hibernate.annotations.Table;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class UserDTO {
     private Long id;
-
     private String firstName;
     private String lastName;
 
@@ -41,4 +29,3 @@ public class User {
         this.lastName = lastName;
     }
 }
-

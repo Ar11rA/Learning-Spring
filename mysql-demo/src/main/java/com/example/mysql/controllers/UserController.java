@@ -1,6 +1,7 @@
 package com.example.mysql.controllers;
 
 import com.example.mysql.domains.User;
+import com.example.mysql.models.UserDTO;
 import com.example.mysql.services.IUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +21,8 @@ public class UserController {
     }
 
     @RequestMapping(path="/all", method = RequestMethod.GET)
-    public ResponseEntity<List<User>> getUsers() {
-        List<User> users = userService.getUsers();
+    public ResponseEntity<List<UserDTO>> getUsers() {
+        List<UserDTO> users = userService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 }
