@@ -1,6 +1,5 @@
 package com.example.mysql.controllers;
 
-import com.example.mysql.domains.User;
 import com.example.mysql.models.UserDTO;
 import com.example.mysql.services.IUserService;
 import org.springframework.http.HttpStatus;

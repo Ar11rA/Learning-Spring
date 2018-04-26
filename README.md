@@ -19,3 +19,6 @@
 2. https://spring.io/guides/gs/spring-boot/
 3. https://www.callicoder.com/spring-boot-rest-api-tutorial-with-mysql-jpa-hibernate/
 4. https://www.boraji.com/spring-mvc-4-restcontroller-example
+5. https://medium.com/@harittweets/evolving-your-database-using-spring-boot-and-liquibase-844fcd7931da
+6. http://www.baeldung.com/liquibase-refactor-schema-of-java-app
+7. http://www.baeldung.com/rest-with-spring-series/
