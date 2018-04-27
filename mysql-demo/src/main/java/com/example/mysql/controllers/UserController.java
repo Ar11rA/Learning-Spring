@@ -5,6 +5,8 @@ import com.example.mysql.services.IUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
@@ -19,9 +21,22 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(path="/all", method = RequestMethod.GET)
+    @RequestMapping(path = {"/", ""}, method = RequestMethod.GET)
     public ResponseEntity<List<UserDTO>> getUsers() {
         List<UserDTO> users = userService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
+
+    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
+        UserDTO user = userService.getUserById(id);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @RequestMapping(path = {"/", ""}, method = RequestMethod.POST)
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
+        UserDTO user = userService.createNewUser(userDTO);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
+    }
+
 }

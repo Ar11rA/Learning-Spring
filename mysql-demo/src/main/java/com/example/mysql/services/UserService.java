@@ -1,5 +1,6 @@
 package com.example.mysql.services;
 
+import com.example.mysql.domains.User;
 import com.example.mysql.mappers.UserMapper;
 import com.example.mysql.models.UserDTO;
 import com.example.mysql.repositories.UserRepository;
@@ -28,4 +29,21 @@ public class UserService implements IUserService {
                 .map(userMapper::userToUserDTO)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public UserDTO getUserById(Long id) {
+        return userRepository.findById(id)
+                .map(userMapper::userToUserDTO)
+                .orElseThrow(RuntimeException::new);
+    }
+
+    @Override
+    public UserDTO createNewUser(UserDTO userDTO) {
+       User user = userMapper.userDtoToUser((userDTO));
+       User savedUser = userRepository.save(user);
+       UserDTO savedUserDTO = userMapper.userToUserDTO((savedUser));
+       return savedUserDTO;
+    }
+
+
 }
