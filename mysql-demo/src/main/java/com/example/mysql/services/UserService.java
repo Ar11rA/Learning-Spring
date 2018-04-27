@@ -45,5 +45,29 @@ public class UserService implements IUserService {
        return savedUserDTO;
     }
 
+    @Override
+    public UserDTO updateUserById(Long id, UserDTO userDTO) {
+        return userRepository.findById(id).map(user -> {
+
+            if(userDTO.getFirstName() != null){
+                user.setFirstName(userDTO.getFirstName());
+            }
+
+            if(userDTO.getFirstName() != null){
+                user.setLastName(userDTO.getLastName());
+            }
+
+            UserDTO returnDto = userMapper.userToUserDTO(userRepository.save(user));
+
+            return returnDto;
+
+        }).orElseThrow(RuntimeException::new);
+    }
+
+    @Override
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
+    }
+
 
 }

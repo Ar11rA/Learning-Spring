@@ -5,7 +5,9 @@ import com.example.mysql.models.UserDTO;
 import java.util.List;
 
 public interface IUserService {
-    public List<UserDTO> getAllUsers();
-    public UserDTO getUserById(Long id);
-    public UserDTO createNewUser(UserDTO userDTO);
+    List<UserDTO> getAllUsers();
+    UserDTO getUserById(Long id);
+    UserDTO createNewUser(UserDTO userDTO);
+    UserDTO updateUserById(Long id, UserDTO userDTO);
+    void deleteUserById(Long id);
 }
