@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface IPostService {
     public List<PostDTO> getAllPosts();
+    PostDTO getPostById(Long id);
+    PostDTO createNewPost(PostDTO postDTO);
+    PostDTO updatePostById(Long id, PostDTO postDTO);
+    void deletePostById(Long id);
 }
