@@ -1,6 +1,7 @@
 package com.example.mysql.services;
 
 import com.example.mysql.domains.Post;
+import com.example.mysql.exceptions.ResourceNotFoundException;
 import com.example.mysql.mappers.PostMapper;
 import com.example.mysql.models.PostDTO;
 import com.example.mysql.repositories.PostRepository;
@@ -34,7 +35,7 @@ public class PostService implements IPostService {
     public PostDTO getPostById(Long id) {
         return postRepository.findById(id)
                 .map(postMapper::postToPostDTO)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override
@@ -61,7 +62,7 @@ public class PostService implements IPostService {
 
             return returnDto;
 
-        }).orElseThrow(RuntimeException::new);
+        }).orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override

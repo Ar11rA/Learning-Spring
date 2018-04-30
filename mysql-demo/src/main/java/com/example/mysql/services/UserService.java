@@ -1,6 +1,7 @@
 package com.example.mysql.services;
 
 import com.example.mysql.domains.User;
+import com.example.mysql.exceptions.ResourceNotFoundException;
 import com.example.mysql.mappers.UserMapper;
 import com.example.mysql.models.UserDTO;
 import com.example.mysql.repositories.UserRepository;
@@ -34,7 +35,7 @@ public class UserService implements IUserService {
     public UserDTO getUserById(Long id) {
         return userRepository.findById(id)
                 .map(userMapper::userToUserDTO)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override
@@ -61,7 +62,7 @@ public class UserService implements IUserService {
 
             return returnDto;
 
-        }).orElseThrow(RuntimeException::new);
+        }).orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override
