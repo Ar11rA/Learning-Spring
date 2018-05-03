@@ -1,20 +1,14 @@
-package com.example.mysql.domains;
+package com.example.mysql.models;
 
-import javax.persistence.*;
 
-@Entity
-@Table(name = "user")
-public class User {
+import java.util.HashSet;
+import java.util.Set;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class AuthorDTO {
     private Long id;
-
-    @Column(name="first_name")
     private String firstName;
-
-    @Column(name="last_name")
     private String lastName;
+    private Set<BookBaseDTO> books  = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -39,5 +33,12 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-}
 
+    public Set<BookBaseDTO> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<BookBaseDTO> books) {
+        this.books = books;
+    }
+}
