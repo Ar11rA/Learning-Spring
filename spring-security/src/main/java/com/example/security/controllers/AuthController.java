@@ -1,6 +1,7 @@
 package com.example.security.controllers;
 
 import com.example.security.DTOs.LoginDTO;
+import com.example.security.DTOs.RegisterDTO;
 import com.example.security.services.AuthService;
 import com.example.security.services.UserService;
 import org.springframework.http.HttpStatus;
@@ -23,14 +24,17 @@ public class AuthController {
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public ResponseEntity<String> Login() {
-        String token = "token";
+    public ResponseEntity<String> Login(@RequestBody LoginDTO loginDTO) {
+        if(!authService.isUserValid(loginDTO.username, loginDTO.password)) {
+            return new ResponseEntity<>("Login Failed!", HttpStatus.UNAUTHORIZED);
+        }
+        String token = authService.getJWTToken(loginDTO.username);
         return new ResponseEntity<>(token, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/register", method = RequestMethod.POST)
-    public ResponseEntity<String> Register(@RequestBody LoginDTO loginDTO){
-        userService.saveUser(loginDTO);
+    public ResponseEntity<String> Register(@RequestBody RegisterDTO registerDTO){
+        userService.saveUser(registerDTO);
         return new ResponseEntity<>("Saved", HttpStatus.OK);
     }
 

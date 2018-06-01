@@ -1,6 +1,6 @@
 package com.example.security.services;
 
-import com.example.security.DTOs.LoginDTO;
+import com.example.security.DTOs.RegisterDTO;
 import com.example.security.domains.Auth;
 import com.example.security.domains.User;
 import com.example.security.repositories.AuthRepository;
@@ -19,14 +19,14 @@ public class UserService {
         this.authRepository = authRepository;
     }
 
-    public void saveUser(LoginDTO loginDTO) {
+    public void saveUser(RegisterDTO registerDTO) {
         User user = new User();
         Auth auth = new Auth();
-        user.setFirstName(loginDTO.firstName);
-        user.setLastName(loginDTO.lastName);
-        user.setUsername(loginDTO.username);
-        auth.setUsername(loginDTO.username);
-        auth.setPassword(Encoder.getPassword(loginDTO.password));
+        user.setFirstName(registerDTO.firstName);
+        user.setLastName(registerDTO.lastName);
+        user.setUsername(registerDTO.username);
+        auth.setUsername(registerDTO.username);
+        auth.setPassword(Encoder.getPassword(registerDTO.password));
         userRepository.save(user);
         authRepository.save(auth);
     }
