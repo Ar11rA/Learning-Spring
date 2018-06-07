@@ -28,12 +28,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }
-        return new User(user.getUsername(), user.getPassword(), getAdminAuthority());
+        return new User(
+                user.getUsername(),
+                user.getPassword(),
+                getAdminAuthority()
+                );
     }
 
     private  List<GrantedAuthority> getAdminAuthority() {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ADMIN"));
+        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         return authorities;
     }
 

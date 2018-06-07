@@ -65,7 +65,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
     private List<GrantedAuthority> getAdminAuthority() {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ADMIN"));
+        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         return authorities;
     }
 }
