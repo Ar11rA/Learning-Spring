@@ -2,11 +2,14 @@ package com.example.security.services;
 
 import com.example.security.domains.Auth;
 import com.example.security.repositories.AuthRepository;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.Date;
 
 import static com.example.security.auth.SecurityConstants.EXPIRATION_TIME;
@@ -34,9 +37,12 @@ public class AuthService {
     }
 
     public String getJWTToken(String username) {
+        Claims claims = Jwts.claims().setSubject(username);
+        claims.put("name", username);
+        claims.put("scopes", Arrays.asList(new SimpleGrantedAuthority("ADMIN")));
         String token = Jwts.builder()
-                .setSubject(username)
-                .claim("name", username)
+                .setClaims(claims)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
