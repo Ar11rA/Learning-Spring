@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping(path = "api/v1/secure")
-public class ClosedController {
+public class AuthorityController {
 
     @RequestMapping(path = "/hello", method = RequestMethod.GET)
     public ResponseEntity<String> GetHello() {

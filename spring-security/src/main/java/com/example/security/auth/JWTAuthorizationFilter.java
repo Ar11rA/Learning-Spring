@@ -1,5 +1,8 @@
 package com.example.security.auth;
 
+import com.example.security.domains.Role;
+import com.example.security.repositories.UserRepository;
+import com.example.security.services.UserService;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static com.example.security.auth.SecurityConstants.HEADER_STRING;
@@ -26,10 +30,12 @@ import static com.example.security.auth.SecurityConstants.TOKEN_PREFIX;
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
     private UserDetailsService userDetailsService;
+    private UserRepository userRepository;
 
-    public JWTAuthorizationFilter(AuthenticationManager authManager, UserDetailsService userDetailsService) {
+    public JWTAuthorizationFilter(AuthenticationManager authManager, UserDetailsService userDetailsService, UserRepository userRepository) {
         super(authManager);
         this.userDetailsService = userDetailsService;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -54,18 +60,28 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                     .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
                     .getBody()
                     .getSubject();
+            Collection<Role> roles = userRepository.findUserByUsername(user).getRoles();
             UserDetails userDetails = userDetailsService.loadUserByUsername(user);
             if (user != null) {
-                return new UsernamePasswordAuthenticationToken(userDetails, null, getAdminAuthority());
+                return new UsernamePasswordAuthenticationToken(userDetails, null, getAdminAuthority(roles));
             }
             return null;
         }
         return null;
     }
 
+
     private List<GrantedAuthority> getAdminAuthority() {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        return authorities;
+    }
+
+    private  List<GrantedAuthority> getAdminAuthority(Collection<Role> userRoles) {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        for(Role role : userRoles) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.name));
+        }
         return authorities;
     }
 }
